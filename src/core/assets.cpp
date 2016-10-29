@@ -18,6 +18,10 @@ Assets::Assets()
 	iconito = al_load_bitmap("assets/iconito.png");
 	notavailable = al_load_bitmap("assets/notavailable.png");
 
+	rainyterrain = al_load_bitmap("assets/rainyterrain.png");
+	grassterrain = al_load_bitmap("assets/grassterrain.png");
+	roadterrain = al_load_bitmap("assets/roadterrain.png");
+
 	chechu_all_sheet.reset(new Spritesheet( 6, 2, chechu_all_bitmap ));
 	humo_sheet.reset(new Spritesheet( 6, 2, humo_bitmap ));
 
