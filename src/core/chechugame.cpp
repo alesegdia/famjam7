@@ -1,6 +1,8 @@
 #include "chechugame.h"
 #include "assets.h"
 
+#include <allegro5/allegro_ttf.h>
+
 ChechuGame::ChechuGame(int sw, int sh)
 	: Game( sw, sh )
 {
@@ -17,13 +19,21 @@ int ChechuGame::create(int argc, char **argv)
 	Assets::Initialize();
 
 	m_gameplayScreen.reset(new GameplayScreen(this));
+	m_menuScreen.reset(new MenuScreen(this));
 
+	setScreen(m_menuScreen);
 	setScreen(m_gameplayScreen);
+
+	m_font = al_load_ttf_font("assets/Early GameBoy.ttf", 8, 0);
+	m_fontBig = al_load_ttf_font("assets/Early GameBoy.ttf", 16, 0);
 
 	return 0;
 }
 
 void ChechuGame::dispose()
 {
+	al_destroy_font(m_font);
+	al_destroy_font(m_fontBig);
+
 	Assets::Dispose();
 }
