@@ -75,9 +75,12 @@ void MenuScreen::update(double delta)
 			if( m_selected > 2 ) m_selected = 2;
 		}
 
-		if( Input::IsKeyJustPressed(ALLEGRO_KEY_ENTER) || Input::IsKeyJustPressed(ALLEGRO_KEY_ENTER) )
+		if( Input::IsKeyJustPressed(ALLEGRO_KEY_ENTER) || Input::IsKeyJustPressed(ALLEGRO_KEY_SPACE) )
 		{
-
+			if( m_selected == 0 )
+			{
+				m_game->setScreen(m_game->m_startGameScreen);
+			}
 		}
 	}
 

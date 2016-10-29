@@ -1,6 +1,4 @@
 #include "bikeparams.h"
 
-BikeParams::BikeParams()
-{
+BikeParams BikeParamsHolder::s_bikes[3];
 
-}
