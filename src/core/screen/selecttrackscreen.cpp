@@ -36,18 +36,16 @@ void SelectTrackScreen::update(double delta)
 	{
 		m_selectedTrack--;
 		if( m_selectedTrack < 0 ) m_selectedTrack = 0;
-		Assets::instance->set_bike_color(m_selectedTrack);
 	}
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_RIGHT) )
 	{
 		m_selectedTrack++;
 		if( m_selectedTrack > 2 ) m_selectedTrack = 2;
-		Assets::instance->set_bike_color(m_selectedTrack);
 	}
 
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_ENTER) || Input::IsKeyJustPressed(ALLEGRO_KEY_SPACE) )
 	{
-		if( m_selectedTrack > m_game->m_bikeLevel )
+		if( m_selectedTrack > m_game->m_trackLevel )
 		{
 			// play ERROR sfx
 		}
