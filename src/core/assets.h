@@ -18,13 +18,23 @@ public:
 	Assets();
 	~Assets();
 
-	ALLEGRO_BITMAP* chechu_running_bitmap;
-	ALLEGRO_BITMAP* chechu_dashing_bitmap;
+	ALLEGRO_BITMAP* humo_bitmap;
+	ALLEGRO_BITMAP* chechu_all_bitmap;
+	ALLEGRO_BITMAP* bolita;
+	ALLEGRO_BITMAP* speed;
+	ALLEGRO_BITMAP* speedrojo;
+	ALLEGRO_BITMAP* speednaranja;
+	ALLEGRO_BITMAP* chechuface;
 
-	Spritesheet::SharedPtr chechu_running_sheet;
-	Spritesheet::SharedPtr chechu_dashing_sheet;
+	ALLEGRO_COLOR m_currentBikeColor;
+	void set_bike_color(int bike_type );
+
+	Spritesheet::SharedPtr chechu_all_sheet;
+	Spritesheet::SharedPtr humo_sheet;
 
 	Animation::SharedPtr chechu_running_anim;
 	Animation::SharedPtr chechu_dashing_anim;
+	Animation::SharedPtr humo_running_anim;
+	Animation::SharedPtr humo_dashing_anim;
 
 };
