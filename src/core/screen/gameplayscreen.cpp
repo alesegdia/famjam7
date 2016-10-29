@@ -114,8 +114,8 @@ void GameplayScreen::render()
 	for( int i = 0; i < 11; i++ )
 	{
 		ALLEGRO_BITMAP* bm;
-		if( i < currentBikeParams().m_speedLimits[0] ) bm = Assets::instance->speed;
-		else if( i < currentBikeParams().m_speedLimits[1] ) bm = Assets::instance->speednaranja;
+		if( i < currentBikeParams().indicatorSpeedLimits[0] ) bm = Assets::instance->speed;
+		else if( i < currentBikeParams().indicatorSpeedLimits[1] ) bm = Assets::instance->speednaranja;
 		else bm = Assets::instance->speedrojo;
 
 		al_draw_bitmap( bm, 50 + 6 * i, 5, 0);

@@ -3,11 +3,18 @@
 
 struct BikeParams
 {
-	int m_accel;
-	int m_maxSpeed;
-	int m_slide;
-	int m_speedLimits[2];
-	int m_ptsToUnlock;
+	int indicatorAccel;
+	float realAccel;
+
+	int indicatorMaxSpeed;
+	float realMaxSpeed;
+
+	int indicatorSlide;
+	float realSlide;
+
+	int indicatorSpeedLimits[2];
+
+	int realPtsToUnlock;
 };
 
 class BikeParamsHolder
@@ -15,9 +22,10 @@ class BikeParamsHolder
 public:
 	static void Initialize()
 	{
-		s_bikes[0] = { 1, 2, 3, {2, 3}, 0 };
-		s_bikes[1] = { 2, 1, 4, {2, 3}, 300 };
-		s_bikes[2] = { 4, 3, 1, {2, 4}, 600 };
+		//				accel(i)	accel(r) 	speed(i)	speed(r)	slide(i)	slide(r)	limits		ptsToUnlock
+		s_bikes[0] = {	1,			1.f,		2,			2.f,		3,			3.f,		{2, 3},		0			};
+		s_bikes[1] = {	2,			2.f,		1,			1.f,		4,			4.f,		{2, 3},		300			};
+		s_bikes[2] = {	4,			4.f,		3,			3.f,		1,			1.f,		{2, 4},		600			};
 	}
 
 	static BikeParams s_bikes[3];

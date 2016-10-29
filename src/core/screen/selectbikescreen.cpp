@@ -85,7 +85,7 @@ void SelectBikeScreen::render()
 		case 1: case 3: break;
 		case 2:
 			char buffer[32];
-			snprintf(buffer, 32, "earn %d points", BikeParamsHolder::s_bikes[m_selectedBike].m_ptsToUnlock);
+			snprintf(buffer, 32, "earn %d points", BikeParamsHolder::s_bikes[m_selectedBike].realPtsToUnlock);
 			al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 62, 4, ALLEGRO_ALIGN_CENTRE, buffer);
 			break;
 		}
@@ -105,19 +105,19 @@ void SelectBikeScreen::render()
 	const int oy = 0;
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 45, 0, "speed" );
-	for( int i = 0; i < BikeParamsHolder::s_bikes[m_selectedBike].m_maxSpeed; i++ )
+	for( int i = 0; i < BikeParamsHolder::s_bikes[m_selectedBike].indicatorMaxSpeed; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 47, 0 );
 	}
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 55, 0, "accel" );
-	for( int i = 0; i < BikeParamsHolder::s_bikes[m_selectedBike].m_accel; i++ )
+	for( int i = 0; i < BikeParamsHolder::s_bikes[m_selectedBike].indicatorAccel; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 57, 0 );
 	}
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 65, 0, "slide" );
-	for( int i = 0; i < BikeParamsHolder::s_bikes[m_selectedBike].m_slide; i++ )
+	for( int i = 0; i < BikeParamsHolder::s_bikes[m_selectedBike].indicatorSlide; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 67, 0 );
 	}
