@@ -46,6 +46,7 @@ private:
 	Vec2i m_playerPos = Vec2i( 10, 30 );
 	double m_playerSpeed;
 	AnimationData m_playerAnimData;
+	AnimationData m_humoAnimData;
 	GameState m_gameState = GameState::Stopped;
 
 	bool m_zxCounter = false;

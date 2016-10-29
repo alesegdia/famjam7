@@ -34,6 +34,7 @@ void GameplayScreen::update(double delta)
 	}
 
 	m_playerAnimData.update(delta * m_playerSpeed);
+	m_humoAnimData.update(delta);
 
 	if( m_gameState == GameState::Stopped || m_gameState == GameState::Running )
 	{
@@ -44,14 +45,21 @@ void GameplayScreen::update(double delta)
 		}
 	}
 
+	if( Input::IsKeyJustPressed(ALLEGRO_KEY_Q) ) Assets::instance->set_bike_color(0);
+	if( Input::IsKeyJustPressed(ALLEGRO_KEY_W) ) Assets::instance->set_bike_color(1);
+	if( Input::IsKeyJustPressed(ALLEGRO_KEY_E) ) Assets::instance->set_bike_color(2);
+
+
 	switch( m_gameState )
 	{
 	case GameState::Stopped: break;
 	case GameState::Running:
 		Assets::instance->chechu_running_anim->updateData( m_playerAnimData );
+		Assets::instance->humo_running_anim->updateData( m_humoAnimData );
 		break;
 	case GameState::Dashing:
 		Assets::instance->chechu_dashing_anim->updateData( m_playerAnimData );
+		Assets::instance->humo_dashing_anim->updateData( m_humoAnimData );
 		m_playerSpeed -= 0.01;
 		if( m_playerSpeed <= 0 )
 		{
@@ -69,6 +77,7 @@ void GameplayScreen::render()
 	al_clear_to_color( al_map_rgb( 95, 205, 228 ) );
 	m_cam.bind();
 
+	printf("%f\n", m_playerSpeed);fflush(0);
 	const float portion = 5;
 	const float portion_height = GameConstants::WindowHeight / portion;
 	const ALLEGRO_COLOR bands_color = al_map_rgb(0, 0, 0);
@@ -78,16 +87,38 @@ void GameplayScreen::render()
 	switch( m_gameState )
 	{
 	case GameState::Stopped:
-		al_draw_bitmap( Assets::instance->chechu_running_sheet->getFrame(0), m_playerPos.x(), m_playerPos.y(), 0 );
+		al_draw_bitmap( Assets::instance->chechu_all_sheet->getFrame(6), m_playerPos.x(), m_playerPos.y(), 0 );
 		break;
 	case GameState::Running:
+		m_playerAnimData.render(10, 30);
+		if( m_playerSpeed > 0.5f ) {
+			m_humoAnimData.render(10, 30);
+		}
+		break;
 	case GameState::Dashing:
 		m_playerAnimData.render(10, 30);
+		if( m_playerSpeed > 0.2f ) {
+			m_humoAnimData.render(10, 30);
+		}
 		break;
 	case GameState::Crushed: break;
 	case GameState::Success: break;
 	}
+	al_draw_text(m_game->m_font, al_map_rgb(255, 255, 255), 4, 3, 0, "speed");
+	for( int i = 0; i < 11; i++ )
+	{
+		ALLEGRO_BITMAP* bm;
+		if( i < 5 ) bm = Assets::instance->speed;
+		else if( i < 9 ) bm = Assets::instance->speednaranja;
+		else bm = Assets::instance->speedrojo;
 
+		al_draw_bitmap( bm, 50 + 6 * i, 5, 0);
+	}
+
+	al_draw_text(m_game->m_font, al_map_rgb(255, 255, 255), 4, 67, 0, "dist.");
+	al_draw_line( 46, 72, 114, 72, al_map_rgb(255, 255, 255), 1);
+
+	al_draw_bitmap( Assets::instance->bolita, 70, 69, 0);
 }
 
 void GameplayScreen::hide()
@@ -99,8 +130,6 @@ void GameplayScreen::doZXStep()
 {
 	if( ( m_zxCounter && Input::IsKeyJustPressed(ALLEGRO_KEY_Z)) || (!m_zxCounter && Input::IsKeyJustPressed(ALLEGRO_KEY_X)) )
 	{
-		printf("zxstep\n");
-
 		m_playerSpeed += 0.01;
 		m_zxCounter = !m_zxCounter;
 		m_gameState = GameState::Running;
