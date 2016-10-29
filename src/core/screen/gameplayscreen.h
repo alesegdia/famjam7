@@ -7,6 +7,7 @@
 #include <alligator/graphics/animation.h>
 
 #include "../bikeparams.h"
+#include "../trackparams.h"
 
 class ChechuGame;
 
@@ -50,6 +51,11 @@ private:
 		return BikeParamsHolder::s_bikes[m_selectedBike];
 	}
 
+	const TrackParams& currentTrackParams()
+	{
+		return TrackParamsHolder::s_tracks[m_selectedTrack];
+	}
+
 	ChechuGame* m_game;
 	Camera m_cam;
 
@@ -63,5 +69,8 @@ private:
 	int m_selectedBike  = 0 ;
 
 	bool m_zxCounter = false;
+
+	float m_currentPos = 0;
+	float m_trackLength;
 
 };

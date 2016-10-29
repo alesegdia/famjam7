@@ -60,7 +60,7 @@ void GameplayScreen::update(double delta)
 	case GameState::Dashing:
 		Assets::instance->chechu_dashing_anim->updateData( m_playerAnimData );
 		Assets::instance->humo_dashing_anim->updateData( m_humoAnimData );
-		m_playerSpeed -= 0.01;
+		m_playerSpeed -= GameConstants::DashReduceSpeed;
 		if( m_playerSpeed <= 0 )
 		{
 			m_playerSpeed = 0;
@@ -70,6 +70,7 @@ void GameplayScreen::update(double delta)
 	case GameState::Success: break;
 	}
 
+	m_currentPos += m_playerSpeed;
 }
 
 void GameplayScreen::render()
@@ -124,7 +125,11 @@ void GameplayScreen::render()
 	al_draw_text(m_game->m_font, al_map_rgb(255, 255, 255), 4, 67, 0, "dist.");
 	al_draw_line( 46, 72, 114, 72, al_map_rgb(255, 255, 255), 1);
 
-	al_draw_bitmap( Assets::instance->bolita, 70, 69, 0);
+	// min: 47, max: 107, diff = 60
+	float recorrido = 60 * m_currentPos / currentTrackParams().realLength;
+	al_draw_bitmap( Assets::instance->bolita, 47 + recorrido, 69, 0);
+
+	al_draw_circle( currentTrackParams().realLength - m_currentPos, 10, 2, al_map_rgb(255, 255, 0), 1 );
 }
 
 void GameplayScreen::hide()
@@ -136,13 +141,13 @@ void GameplayScreen::doZXStep()
 {
 	if( ( m_zxCounter && Input::IsKeyJustPressed(ALLEGRO_KEY_Z)) || (!m_zxCounter && Input::IsKeyJustPressed(ALLEGRO_KEY_X)) )
 	{
-		m_playerSpeed += 0.01;
+		m_playerSpeed += currentBikeParams().realAccel;
 		m_zxCounter = !m_zxCounter;
 		m_gameState = GameState::Running;
 	}
 	else
 	{
-		m_playerSpeed -= 0.001;
+		m_playerSpeed -= GameConstants::FrictionReduceSpeed;
 		if( m_playerSpeed < 0 )
 		{
 			m_playerSpeed = 0;

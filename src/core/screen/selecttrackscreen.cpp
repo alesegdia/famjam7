@@ -83,7 +83,7 @@ void SelectTrackScreen::render()
 		case 1: case 3: break;
 		case 2:
 			char buffer[32];
-			snprintf(buffer, 32, "earn %d points", TrackParamsHolder::s_tracks[m_selectedTrack].m_ptsToUnlock);
+			snprintf(buffer, 32, "earn %d points", TrackParamsHolder::s_tracks[m_selectedTrack].realPtsToUnlock);
 			al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 62, 4, ALLEGRO_ALIGN_CENTRE, buffer);
 			break;
 		}
@@ -111,13 +111,13 @@ void SelectTrackScreen::render()
 	const int oy = 0;
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 2, oy + 45, 0, "length" );
-	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].m_slick; i++ )
+	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].indicatorSlick; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 47, 0 );
 	}
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 55, 0, "slick" );
-	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].m_dist; i++ )
+	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].indicatorLength; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 57, 0 );
 	}
