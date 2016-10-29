@@ -1,6 +1,7 @@
 #include "chechugame.h"
 #include "assets.h"
 #include "bikeparams.h"
+#include "trackparams.h"
 
 #include <allegro5/allegro_ttf.h>
 
@@ -19,6 +20,7 @@ int ChechuGame::create(int argc, char **argv)
 {
 	Assets::Initialize();
 	BikeParamsHolder::Initialize();
+	TrackParamsHolder::Initialize();
 
 	m_gameplayScreen.reset(new GameplayScreen(this));
 	m_menuScreen.reset(new MenuScreen(this));
