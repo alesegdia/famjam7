@@ -11,6 +11,7 @@
 #include "screen/gameplayscreen.h"
 #include "screen/menuscreen.h"
 #include "screen/selectbikescreen.h"
+#include "screen/selecttrackscreen.h"
 
 class ChechuGame : public Game {
 
@@ -26,10 +27,12 @@ public:
 	std::shared_ptr<GameplayScreen> m_gameplayScreen;
 	std::shared_ptr<MenuScreen> m_menuScreen;
 	std::shared_ptr<SelectBikeScreen> m_selectBikeScreen;
+	std::shared_ptr<SelectTrackScreen> m_selectTrackScreen;
 
 	ALLEGRO_FONT* m_font = nullptr;
 	ALLEGRO_FONT* m_fontBig = nullptr;
 	int m_bikeLevel = 0;
+	int m_trackLevel = 0;
 
 
 };

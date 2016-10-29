@@ -7,6 +7,7 @@ struct TrackParams
 	float m_dist;
 	float m_maxSpeed;
 	float m_slide;
+	int m_ptsToUnlock;
 };
 
 class TrackParamsHolder

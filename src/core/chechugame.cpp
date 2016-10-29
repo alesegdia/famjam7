@@ -23,6 +23,7 @@ int ChechuGame::create(int argc, char **argv)
 	m_gameplayScreen.reset(new GameplayScreen(this));
 	m_menuScreen.reset(new MenuScreen(this));
 	m_selectBikeScreen.reset(new SelectBikeScreen(this));
+	m_selectTrackScreen.reset(new SelectTrackScreen(this));
 
 	setScreen(m_menuScreen);
 
