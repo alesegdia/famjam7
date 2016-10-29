@@ -79,7 +79,7 @@ void MenuScreen::update(double delta)
 		{
 			if( m_selected == 0 )
 			{
-				m_game->setScreen(m_game->m_startGameScreen);
+				m_game->setScreen(m_game->m_selectBikeScreen);
 			}
 		}
 	}

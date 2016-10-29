@@ -1,31 +1,31 @@
-#include "startgamescreen.h"
+#include "selectbikescreen.h"
 #include "../chechugame.h"
 #include "../assets.h"
 #include "../gameconstants.h"
 #include "../bikeparams.h"
 
-StartGameScreen::StartGameScreen( ChechuGame* game )
+SelectBikeScreen::SelectBikeScreen( ChechuGame* game )
 	: m_game(game)
 {
 	m_cam.scale( GameConstants::ScaleFactor, GameConstants::ScaleFactor );
 }
 
-StartGameScreen::~StartGameScreen()
+SelectBikeScreen::~SelectBikeScreen()
 {
 
 }
 
-void StartGameScreen::show()
+void SelectBikeScreen::show()
 {
 
 }
 
-void StartGameScreen::hide()
+void SelectBikeScreen::hide()
 {
 
 }
 
-void StartGameScreen::update(double delta)
+void SelectBikeScreen::update(double delta)
 {
 	if( Input::IsKeyDown(ALLEGRO_KEY_ESCAPE) )
 	{
@@ -54,7 +54,7 @@ void StartGameScreen::update(double delta)
 		else
 		{
 			// go to track selection
-			m_game->setScreen(m_game->m_gameplayScreen);
+			m_game->setScreen(m_game->m_selectTrackScreen);
 		}
 	}
 
@@ -62,7 +62,7 @@ void StartGameScreen::update(double delta)
 	if( seconds >= 4 ) seconds = 0;
 }
 
-void StartGameScreen::render()
+void SelectBikeScreen::render()
 {
 	m_cam.bind();
 	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );

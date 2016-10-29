@@ -1,16 +1,15 @@
-#ifndef STARTGAMESCREEN_H
-#define STARTGAMESCREEN_H
+#pragma once
 
 #include <alligator/game/iscreen.h>
 #include <alligator/camera/camera.h>
 
 class ChechuGame;
 
-class StartGameScreen : public IScreen
+class SelectBikeScreen : public IScreen
 {
 public:
-	StartGameScreen( ChechuGame* game );
-	virtual ~StartGameScreen();
+	SelectBikeScreen( ChechuGame* game );
+	virtual ~SelectBikeScreen();
 
 	void show();
 
@@ -28,4 +27,3 @@ private:
 
 };
 
-#endif // STARTGAMESCREEN_H
