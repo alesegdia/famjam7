@@ -57,6 +57,9 @@ void StartGameScreen::update(double delta)
 			m_game->setScreen(m_game->m_gameplayScreen);
 		}
 	}
+
+	seconds += delta;
+	if( seconds >= 4 ) seconds = 0;
 }
 
 void StartGameScreen::render()
@@ -66,7 +69,23 @@ void StartGameScreen::render()
 	const int px = 46;
 	const int py = 18;
 
-	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 18, 4, 0, "select bike" );
+	if( m_selectedBike > m_game->m_bikeLevel )
+	{
+		switch( int(floor(seconds)) )
+		{
+		case 0: al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 18, 4, 0, "select bike" ); break;
+		case 1: case 3: break;
+		case 2:
+			char buffer[32];
+			snprintf(buffer, 32, "earn %d points", BikeParamsHolder::s_bikes[m_selectedBike].m_ptsToUnlock);
+			al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 62, 4, ALLEGRO_ALIGN_CENTRE, buffer);
+			break;
+		}
+	}
+	else
+	{
+		al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 18, 4, 0, "select bike" );
+	}
 
 	if( m_selectedBike < 2 )al_draw_bitmap( Assets::instance->cursord, px + 30, py + 8, 0 );
 	if( m_selectedBike > 0 ) al_draw_bitmap( Assets::instance->cursori, px - 5, py + 8, 0 );

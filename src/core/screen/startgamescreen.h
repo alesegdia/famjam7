@@ -24,6 +24,7 @@ private:
 	ChechuGame* m_game;
 	Camera m_cam;
 	int m_selectedBike = 0;
+	double seconds = 0;
 
 };
 
