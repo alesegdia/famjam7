@@ -12,6 +12,11 @@ Assets::Assets()
 	speedrojo = al_load_bitmap("assets/speedrojo.png");
 	speednaranja = al_load_bitmap("assets/speednaran.png");
 	chechuface = al_load_bitmap("assets/caraparte.png");
+	slot = al_load_bitmap("assets/slot.png");
+	cursord = al_load_bitmap("assets/cursord.png");
+	cursori = al_load_bitmap("assets/cursori.png");
+	iconito = al_load_bitmap("assets/iconito.png");
+	notavailable = al_load_bitmap("assets/notavailable.png");
 
 	chechu_all_sheet.reset(new Spritesheet( 6, 2, chechu_all_bitmap ));
 	humo_sheet.reset(new Spritesheet( 6, 2, humo_bitmap ));

@@ -25,6 +25,11 @@ public:
 	ALLEGRO_BITMAP* speedrojo;
 	ALLEGRO_BITMAP* speednaranja;
 	ALLEGRO_BITMAP* chechuface;
+	ALLEGRO_BITMAP* slot;
+	ALLEGRO_BITMAP* cursord;
+	ALLEGRO_BITMAP* cursori;
+	ALLEGRO_BITMAP* iconito;
+	ALLEGRO_BITMAP* notavailable;
 
 	ALLEGRO_COLOR m_currentBikeColor;
 	void set_bike_color(int bike_type );
