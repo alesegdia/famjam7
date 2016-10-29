@@ -145,3 +145,13 @@ void GameplayScreen::doZXStep()
 	}
 }
 
+
+void GameplayScreen::setTrack(int track)
+{
+	m_selectedTrack = track;
+}
+
+void GameplayScreen::setBike(int bike)
+{
+	m_selectedBike = bike;
+}

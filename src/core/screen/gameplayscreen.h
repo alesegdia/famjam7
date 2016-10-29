@@ -6,6 +6,8 @@
 #include <alligator/camera/camera.h>
 #include <alligator/graphics/animation.h>
 
+#include "../bikeparams.h"
+
 class ChechuGame;
 
 enum class GameState {
@@ -36,9 +38,17 @@ public:
 	void render() override;
 	void hide() override;
 
+	void setTrack( int track );
+
+	void setBike( int bike );
+
 private:
 
 	void doZXStep();
+	const BikeParams& currentBikeParams()
+	{
+		return BikeParamsHolder::s_bikes[m_selectedBike];
+	}
 
 	ChechuGame* m_game;
 	Camera m_cam;
@@ -48,6 +58,9 @@ private:
 	AnimationData m_playerAnimData;
 	AnimationData m_humoAnimData;
 	GameState m_gameState = GameState::Stopped;
+
+	int m_selectedTrack = 0 ;
+	int m_selectedBike  = 0 ;
 
 	bool m_zxCounter = false;
 

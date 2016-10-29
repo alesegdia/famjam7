@@ -55,6 +55,7 @@ void SelectBikeScreen::update(double delta)
 		{
 			// go to track selection
 			m_game->setScreen(m_game->m_selectTrackScreen);
+			m_game->m_gameplayScreen->setBike(m_selectedBike);
 		}
 	}
 

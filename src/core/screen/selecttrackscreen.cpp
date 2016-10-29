@@ -53,6 +53,7 @@ void SelectTrackScreen::update(double delta)
 		{
 			// go to track selection
 			m_game->setScreen(m_game->m_gameplayScreen);
+			m_game->m_gameplayScreen->setTrack(m_selectedTrack);
 		}
 	}
 
