@@ -57,7 +57,14 @@ void SelectTrackScreen::update(double delta)
 		}
 	}
 
-	seconds += delta;
+	if( int(floor(seconds)) % 2 == 1 )
+	{
+		seconds += delta * 2;
+	}
+	else
+	{
+		seconds += delta;
+	}
 	if( seconds >= 4 ) seconds = 0;
 }
 
@@ -72,7 +79,7 @@ void SelectTrackScreen::render()
 	{
 		switch( int(floor(seconds)) )
 		{
-		case 0: al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 18, 4, 0, "select bike" ); break;
+		case 0: al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 14, 4, 0, "select track" ); break;
 		case 1: case 3: break;
 		case 2:
 			char buffer[32];
@@ -83,31 +90,39 @@ void SelectTrackScreen::render()
 	}
 	else
 	{
-		al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 18, 4, 0, "select track" );
+		al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), 14, 4, 0, "select track" );
 	}
 
 	if( m_selectedTrack < 2 )al_draw_bitmap( Assets::instance->cursord, px + 30, py + 8, 0 );
 	if( m_selectedTrack > 0 ) al_draw_bitmap( Assets::instance->cursori, px - 5, py + 8, 0 );
 
 	al_draw_bitmap( Assets::instance->slot, px, py, 0 );
-	// draw selected track
+	ALLEGRO_BITMAP* trackbm;
+	switch( m_selectedTrack )
+	{
+	case 0: trackbm = Assets::instance->roadterrain; break;
+	case 1: trackbm = Assets::instance->grassterrain; break;
+	case 2: trackbm = Assets::instance->rainyterrain; break;
+	}
+
+	al_draw_bitmap( trackbm, px+3, py, 0 );
 
 	const int ox = 7;
 	const int oy = 0;
 
-	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 45, 0, "dist." );
-	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].m_maxSpeed; i++ )
+	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 2, oy + 45, 0, "length" );
+	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].m_slick; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 47, 0 );
 	}
 
-	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 55, 0, "manu." );
+	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 55, 0, "slick" );
 	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].m_dist; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 57, 0 );
 	}
 
-	if( m_selectedTrack > m_game->m_bikeLevel )
+	if( m_selectedTrack > m_game->m_trackLevel )
 	{
 		al_draw_bitmap(Assets::instance->notavailable, px, py, 0);
 	}

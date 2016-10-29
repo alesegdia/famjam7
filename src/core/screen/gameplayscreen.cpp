@@ -74,7 +74,13 @@ void GameplayScreen::update(double delta)
 
 void GameplayScreen::render()
 {
-	al_clear_to_color( al_map_rgb( 95, 205, 228 ) );
+	switch( m_selectedTrack )
+	{
+	case 0: al_clear_to_color( al_map_rgb( 132, 126, 135 ) ); break;
+	case 1: al_clear_to_color( al_map_rgb( 153, 229, 80 ) ); break;
+	case 2: al_clear_to_color( al_map_rgb( 102, 57, 49 ) ); break;
+	}
+
 	m_cam.bind();
 
 	printf("%f\n", m_playerSpeed);fflush(0);
@@ -108,8 +114,8 @@ void GameplayScreen::render()
 	for( int i = 0; i < 11; i++ )
 	{
 		ALLEGRO_BITMAP* bm;
-		if( i < 5 ) bm = Assets::instance->speed;
-		else if( i < 9 ) bm = Assets::instance->speednaranja;
+		if( i < currentBikeParams().m_speedLimits[0] ) bm = Assets::instance->speed;
+		else if( i < currentBikeParams().m_speedLimits[1] ) bm = Assets::instance->speednaranja;
 		else bm = Assets::instance->speedrojo;
 
 		al_draw_bitmap( bm, 50 + 6 * i, 5, 0);

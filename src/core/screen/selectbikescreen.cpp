@@ -59,7 +59,14 @@ void SelectBikeScreen::update(double delta)
 		}
 	}
 
-	seconds += delta;
+	if( int(floor(seconds)) % 2 == 1 )
+	{
+		seconds += delta * 2;
+	}
+	else
+	{
+		seconds += delta;
+	}
 	if( seconds >= 4 ) seconds = 0;
 }
 
