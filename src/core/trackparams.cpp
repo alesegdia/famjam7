@@ -1,6 +1,3 @@
 #include "trackparams.h"
 
-TrackParams::TrackParams()
-{
-
-}
+TrackParams TrackParamsHolder::s_tracks[3];
