@@ -1,6 +1,0 @@
-#ifndef TRACKPARAMS_H
-#define TRACKPARAMS_H
-
-
-
-#endif // TRACKPARAMS_H

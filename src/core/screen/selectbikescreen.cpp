@@ -2,7 +2,7 @@
 #include "../chechugame.h"
 #include "../assets.h"
 #include "../gameconstants.h"
-#include "../bikeparams.h"
+#include "../gameparams.h"
 
 SelectBikeScreen::SelectBikeScreen( ChechuGame* game )
 	: m_game(game)

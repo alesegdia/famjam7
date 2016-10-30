@@ -2,7 +2,7 @@
 #include "../chechugame.h"
 #include "../assets.h"
 #include "../gameconstants.h"
-#include "../trackparams.h"
+#include "../gameparams.h"
 
 SelectTrackScreen::SelectTrackScreen( ChechuGame* game )
 	: m_game(game)

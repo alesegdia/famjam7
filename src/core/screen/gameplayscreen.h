@@ -6,8 +6,7 @@
 #include <alligator/camera/camera.h>
 #include <alligator/graphics/animation.h>
 
-#include "../bikeparams.h"
-#include "../trackparams.h"
+#include "../gameparams.h"
 
 class ChechuGame;
 

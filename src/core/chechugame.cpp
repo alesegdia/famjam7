@@ -1,7 +1,6 @@
 #include "chechugame.h"
 #include "assets.h"
-#include "bikeparams.h"
-#include "trackparams.h"
+#include "gameparams.h"
 
 #include <allegro5/allegro_ttf.h>
 
