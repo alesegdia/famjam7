@@ -60,7 +60,7 @@ void GameplayScreen::update(double delta)
 	case GameState::Dashing:
 		Assets::instance->chechu_dashing_anim->updateData( m_playerAnimData );
 		Assets::instance->humo_dashing_anim->updateData( m_humoAnimData );
-		m_playerSpeed -= GameConstants::DashReduceSpeed;
+		m_playerSpeed -= currentBikeParams().realSlide;
 		if( m_playerSpeed <= 0 )
 		{
 			m_playerSpeed = 0;
@@ -71,6 +71,11 @@ void GameplayScreen::update(double delta)
 	}
 
 	m_currentPos += m_playerSpeed;
+
+	if( m_playerSpeed > currentBikeParams().realMaxSpeed )
+	{
+		m_playerSpeed = currentBikeParams().realMaxSpeed;
+	}
 }
 
 void GameplayScreen::render()
@@ -125,11 +130,18 @@ void GameplayScreen::render()
 	al_draw_text(m_game->m_font, al_map_rgb(255, 255, 255), 4, 67, 0, "dist.");
 	al_draw_line( 46, 72, 114, 72, al_map_rgb(255, 255, 255), 1);
 
+	if( m_currentPos >= currentTrackParams().realLength )
+	{
+		m_playerSpeed = 0;
+		m_currentPos = currentTrackParams().realLength;
+		//m_gameState = GameState::Crushed;
+	}
+
 	// min: 47, max: 107, diff = 60
 	float recorrido = 60 * m_currentPos / currentTrackParams().realLength;
 	al_draw_bitmap( Assets::instance->bolita, 47 + recorrido, 69, 0);
 
-	al_draw_circle( currentTrackParams().realLength - m_currentPos, 10, 2, al_map_rgb(255, 255, 0), 1 );
+	al_draw_bitmap( Assets::instance->notamovil, currentTrackParams().realLength - m_currentPos + 30, 31, 0);
 }
 
 void GameplayScreen::hide()
