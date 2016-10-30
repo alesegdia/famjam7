@@ -42,6 +42,20 @@ public:
 
 	void setBike( int bike );
 
+	void resetGame()
+	{
+		m_currentPos = 0;
+		m_gameState = GameState::Stopped;
+		m_playerSpeed = 0;
+		m_selectedEnd = 1;
+		m_finishEvent = false;
+		m_midEvent = false;
+		m_startEvent = false;
+		m_dashedDist = 0;
+	}
+
+	int calculaPuntos();
+
 private:
 
 	void doZXStep();
@@ -64,12 +78,19 @@ private:
 	AnimationData m_humoAnimData;
 	GameState m_gameState = GameState::Stopped;
 
-	int m_selectedTrack = 0 ;
-	int m_selectedBike  = 0 ;
+	int m_selectedTrack = 1 ;
+	int m_selectedBike  = 2 ;
 
 	bool m_zxCounter = false;
 
 	float m_currentPos = 0;
 	float m_trackLength;
+	int m_selectedEnd = 1;
+
+	bool m_finishEvent = false;
+	bool m_midEvent = false;
+	bool m_startEvent = false;
+
+	float m_dashedDist = 0;
 
 };

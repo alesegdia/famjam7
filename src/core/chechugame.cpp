@@ -25,11 +25,26 @@ int ChechuGame::create(int argc, char **argv)
 	m_menuScreen.reset(new MenuScreen(this));
 	m_selectBikeScreen.reset(new SelectBikeScreen(this));
 	m_selectTrackScreen.reset(new SelectTrackScreen(this));
+	m_controlsScreen.reset(new ControlsScreen(this));
 
 	setScreen(m_menuScreen);
 
 	m_font = al_load_ttf_font("assets/Early GameBoy.ttf", 8, 0);
 	m_fontBig = al_load_ttf_font("assets/Early GameBoy.ttf", 16, 0);
+
+	FILE* f = fopen("savedash", "rb");
+	if( f )
+	{
+		fread(&m_hiscore, sizeof(m_hiscore), 1, f);
+		m_prevHiscore = m_hiscore;
+		if( m_hiscore > 9999 )
+		{
+			m_hiscore = 9999;
+			m_prevHiscore = 9999;
+		}
+		fclose(f);
+		recomputePermissions();
+	}
 
 	return 0;
 }
