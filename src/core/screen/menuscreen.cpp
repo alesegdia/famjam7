@@ -23,7 +23,6 @@ MenuScreen::~MenuScreen()
 
 void MenuScreen::show()
 {
-
 }
 
 void MenuScreen::hide()
@@ -33,6 +32,8 @@ void MenuScreen::hide()
 
 void MenuScreen::update(double delta)
 {
+	Assets::instance->playintro();
+
 	if( Input::IsKeyDown(ALLEGRO_KEY_ESCAPE) )
 	{
 		m_game->close();
@@ -67,19 +68,42 @@ void MenuScreen::update(double delta)
 		if( Input::IsKeyJustPressed(ALLEGRO_KEY_UP) )
 		{
 			m_selected--;
-			if( m_selected < 0 ) m_selected = 0;
+			if( m_selected < 0 )
+			{
+				m_selected = 0;
+			}
+			else
+			{
+				Assets::instance->click->play();
+			}
 		}
 		else if( Input::IsKeyJustPressed(ALLEGRO_KEY_DOWN) )
 		{
 			m_selected++;
-			if( m_selected > 2 ) m_selected = 2;
+			if( m_selected > 2 )
+			{
+				m_selected = 2;
+			}
+			else
+			{
+				Assets::instance->click->play();
+			}
 		}
 
 		if( Input::IsKeyJustPressed(ALLEGRO_KEY_ENTER) || Input::IsKeyJustPressed(ALLEGRO_KEY_SPACE) )
 		{
+			Assets::instance->click->play();
 			if( m_selected == 0 )
 			{
 				m_game->setScreen(m_game->m_selectBikeScreen);
+			}
+			else if( m_selected == 1 )
+			{
+				m_game->setScreen(m_game->m_controlsScreen);
+			}
+			else if( m_selected == 2 )
+			{
+				m_game->close();
 			}
 		}
 	}
@@ -90,7 +114,6 @@ void MenuScreen::render()
 {
 	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
 
-	printf("%f\n", m_t4);
 	fflush(0);
 	m_cam.bind();
 	al_draw_text(m_game->m_fontBig, al_map_rgba(255, 255, 255, (1.f-m_t4)*255.f), m_x1, 1, 0, "dash");

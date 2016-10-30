@@ -17,7 +17,6 @@ SelectBikeScreen::~SelectBikeScreen()
 
 void SelectBikeScreen::show()
 {
-
 }
 
 void SelectBikeScreen::hide()
@@ -27,6 +26,8 @@ void SelectBikeScreen::hide()
 
 void SelectBikeScreen::update(double delta)
 {
+	Assets::instance->playintro();
+
 	if( Input::IsKeyDown(ALLEGRO_KEY_ESCAPE) )
 	{
 		m_game->close();
@@ -34,12 +35,14 @@ void SelectBikeScreen::update(double delta)
 
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_LEFT) )
 	{
+		Assets::instance->click->play();
 		m_selectedBike--;
 		if( m_selectedBike < 0 ) m_selectedBike = 0;
 		Assets::instance->set_bike_color(m_selectedBike);
 	}
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_RIGHT) )
 	{
+		Assets::instance->click->play();
 		m_selectedBike++;
 		if( m_selectedBike > 2 ) m_selectedBike = 2;
 		Assets::instance->set_bike_color(m_selectedBike);
@@ -50,9 +53,12 @@ void SelectBikeScreen::update(double delta)
 		if( m_selectedBike > m_game->m_bikeLevel )
 		{
 			// play ERROR sfx
+			Assets::instance->wrongclick->play();
 		}
 		else
 		{
+			Assets::instance->click->play();
+
 			// go to track selection
 			m_game->setScreen(m_game->m_selectTrackScreen);
 			m_game->m_gameplayScreen->setBike(m_selectedBike);

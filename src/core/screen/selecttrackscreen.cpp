@@ -17,7 +17,6 @@ SelectTrackScreen::~SelectTrackScreen()
 
 void SelectTrackScreen::show()
 {
-
 }
 
 void SelectTrackScreen::hide()
@@ -27,6 +26,7 @@ void SelectTrackScreen::hide()
 
 void SelectTrackScreen::update(double delta)
 {
+	Assets::instance->playintro();
 	if( Input::IsKeyDown(ALLEGRO_KEY_ESCAPE) )
 	{
 		m_game->close();
@@ -35,12 +35,26 @@ void SelectTrackScreen::update(double delta)
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_LEFT) )
 	{
 		m_selectedTrack--;
-		if( m_selectedTrack < 0 ) m_selectedTrack = 0;
+		if( m_selectedTrack < 0 )
+		{
+			m_selectedTrack = 0;
+		}
+		else
+		{
+			Assets::instance->click->play();
+		}
 	}
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_RIGHT) )
 	{
 		m_selectedTrack++;
-		if( m_selectedTrack > 2 ) m_selectedTrack = 2;
+		if( m_selectedTrack > 2 )
+		{
+			m_selectedTrack = 2;
+		}
+		else
+		{
+			Assets::instance->click->play();
+		}
 	}
 
 	if( Input::IsKeyJustPressed(ALLEGRO_KEY_ENTER) || Input::IsKeyJustPressed(ALLEGRO_KEY_SPACE) )
@@ -48,12 +62,15 @@ void SelectTrackScreen::update(double delta)
 		if( m_selectedTrack > m_game->m_trackLevel )
 		{
 			// play ERROR sfx
+			Assets::instance->wrongclick->play();
 		}
 		else
 		{
 			// go to track selection
+			Assets::instance->click->play();
 			m_game->setScreen(m_game->m_gameplayScreen);
 			m_game->m_gameplayScreen->setTrack(m_selectedTrack);
+			m_game->m_gameplayScreen->resetGame();
 		}
 	}
 
@@ -111,13 +128,13 @@ void SelectTrackScreen::render()
 	const int oy = 0;
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 2, oy + 45, 0, "length" );
-	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].indicatorSlick; i++ )
+	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].indicatorLength; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 47, 0 );
 	}
 
 	al_draw_text( m_game->m_font, al_map_rgb(255, 255, 255), ox + 10, oy + 55, 0, "slick" );
-	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].indicatorLength; i++ )
+	for( int i = 0; i < TrackParamsHolder::s_tracks[m_selectedTrack].indicatorSlick; i++ )
 	{
 		al_draw_bitmap( Assets::instance->iconito, ox + 60 + 8 * i, oy + 57, 0 );
 	}
