@@ -23,6 +23,8 @@ Assets::Assets()
 	grassterrain = al_load_bitmap("assets/grassterrain.png");
 	roadterrain = al_load_bitmap("assets/roadterrain.png");
 
+	carabien = al_load_bitmap("assets/carabien.png");
+
 	chechu_all_sheet.reset(new Spritesheet( 6, 2, chechu_all_bitmap ));
 	humo_sheet.reset(new Spritesheet( 6, 2, humo_bitmap ));
 
@@ -32,6 +34,21 @@ Assets::Assets()
 	humo_dashing_anim.reset(new Animation( 0.1f, 6, humo_sheet->getFrames(0, 5) ));
 
 	m_currentBikeColor = al_map_rgb(48, 96, 130);
+
+	click.reset( new AudioSample("assets/mover_menu.ogg") );
+	wrongclick.reset( new AudioSample("assets/error_bici.ogg") );
+
+	intro.reset( new AudioStream("assets/intro.ogg", ALLEGRO_PLAYMODE_LOOP) );
+	theme.reset( new AudioStream("assets/musica.ogg", ALLEGRO_PLAYMODE_LOOP) );
+
+	intro->rewind();
+	intro->pause();
+	theme->rewind();
+	theme->pause();
+
+	tio.reset( new AudioSample( "assets/kasee.ogg" ) );
+	mama.reset( new AudioSample( "assets/mama.ogg" ) );
+	derrape.reset( new AudioSample( "assets/derrape.ogg" ) );
 }
 
 Assets::~Assets()
