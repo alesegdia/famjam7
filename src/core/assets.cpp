@@ -17,6 +17,7 @@ Assets::Assets()
 	cursori = al_load_bitmap("assets/cursori.png");
 	iconito = al_load_bitmap("assets/iconito.png");
 	notavailable = al_load_bitmap("assets/notavailable.png");
+	notamovil = al_load_bitmap("assets/notamovil.png");
 
 	rainyterrain = al_load_bitmap("assets/rainyterrain.png");
 	grassterrain = al_load_bitmap("assets/grassterrain.png");
@@ -36,6 +37,21 @@ Assets::Assets()
 Assets::~Assets()
 {
 	al_destroy_bitmap(chechu_all_bitmap);
+	al_destroy_bitmap(humo_bitmap);
+	al_destroy_bitmap(bolita);
+	al_destroy_bitmap(speed);
+	al_destroy_bitmap(speedrojo);
+	al_destroy_bitmap(speednaranja);
+	al_destroy_bitmap(chechuface);
+	al_destroy_bitmap(slot);
+	al_destroy_bitmap(cursord);
+	al_destroy_bitmap(cursori);
+	al_destroy_bitmap(iconito);
+	al_destroy_bitmap(notavailable);
+	al_destroy_bitmap(notamovil);
+	al_destroy_bitmap(rainyterrain);
+	al_destroy_bitmap(grassterrain);
+	al_destroy_bitmap(roadterrain);
 }
 
 void Assets::set_bike_color(int bike_type)

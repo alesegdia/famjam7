@@ -33,6 +33,7 @@ public:
 	ALLEGRO_BITMAP* rainyterrain;
 	ALLEGRO_BITMAP* grassterrain;
 	ALLEGRO_BITMAP* roadterrain;
+	ALLEGRO_BITMAP* notamovil;
 
 	ALLEGRO_COLOR m_currentBikeColor;
 	void set_bike_color(int bike_type );
