@@ -33,8 +33,8 @@ void GameplayScreen::update(double delta)
 		m_game->close();
 	}
 
-	m_playerAnimData.update(delta * m_playerSpeed);
-	m_humoAnimData.update(delta);
+	m_playerAnimData.update(delta * m_playerSpeed * GameConstants::PlayerAnimScale);
+	m_humoAnimData.update(delta * GameConstants::HumoAnimScale);
 
 	if( m_gameState == GameState::Stopped || m_gameState == GameState::Running )
 	{
