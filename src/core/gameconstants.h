@@ -11,6 +11,10 @@ public:
 	static constexpr int MapTilesWidth = WindowWidth / TileSize;
 	static constexpr int MapTilesHeight = WindowHeight / TileSize;
 
-	static constexpr float DashReduceSpeed = 0.05f;
+	static constexpr float DashReduceSpeed = 0.5f;
 	static constexpr float FrictionReduceSpeed = 0.01f;
+
+	static constexpr float PlayerAnimScale = 0.05f;
+	static constexpr float HumoAnimScale = 8e-1f;
+
 };

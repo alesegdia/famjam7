@@ -12,23 +12,9 @@ struct BikeParams
 	int indicatorSlide;
 	float realSlide;
 
-	int indicatorSpeedLimits[2];
+	int indicatorSpeedLimits[3];
 
 	int realPtsToUnlock;
-};
-
-class BikeParamsHolder
-{
-public:
-	static void Initialize()
-	{
-		//				accel(i)	accel(r) 	speed(i)	speed(r)	slide(i)	slide(r)	limits		ptsToUnlock
-		s_bikes[0] = {	1,			0.5f,		2,			20.f,		3,			0.5f,		{2, 3},		0			};
-		s_bikes[1] = {	2,			2.f,		1,			1.f,		4,			4.f,		{2, 3},		300			};
-		s_bikes[2] = {	4,			4.f,		3,			3.f,		1,			1.f,		{2, 4},		600			};
-	}
-
-	static BikeParams s_bikes[3];
 };
 
 struct TrackParams
@@ -40,6 +26,23 @@ struct TrackParams
 	float realSlick;
 
 	int realPtsToUnlock;
+
+	float realPoints;
+};
+
+
+class BikeParamsHolder
+{
+public:
+	static void Initialize()
+	{
+		//				accel(i)	accel(r) 	speed(i)	speed(r)	slide(i)	slide(r)	limits		ptsToUnlock
+		s_bikes[0] = {	2,			0.5f,		1,			20.f,		2,			0.1f,		{2, 3, 4},	0			};
+		s_bikes[1] = {	1,			0.3f,		2,			30.f,		3,			0.05f,		{3, 5, 7},	600			};
+		s_bikes[2] = {	4,			1.f,		3,			40.f,		1,			0.4f,		{5, 8, 11},	800			};
+	}
+
+	static BikeParams s_bikes[3];
 };
 
 class TrackParamsHolder
@@ -47,10 +50,10 @@ class TrackParamsHolder
 public:
 	static void Initialize()
 	{
-		//				length(i)	length(r)	slick(i)	slick(r)	ptsToUnlock
-		s_tracks[0] = { 1,			4000.f,		4,			4.f,		0			};
-		s_tracks[1] = { 2,			20000.f,	3,			3.f,		500			};
-		s_tracks[2] = { 4,			40000.f,	1,			1.f,		600			};
+		//				length(i)	length(r)	slick(i)	slick(r)	ptsToUnlock		realPoints
+		s_tracks[0] = { 3,			8000.f,		1,			0.5f,		0,				600			};
+		s_tracks[1] = { 1,			4000.f,		2,			0.4f,		500,			800			};
+		s_tracks[2] = { 2,			6000.f,		3,			0.3f,		700,			1000		};
 	}
 
 	static TrackParams s_tracks[3];
