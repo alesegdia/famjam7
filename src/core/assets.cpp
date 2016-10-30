@@ -24,6 +24,7 @@ Assets::Assets()
 	roadterrain = al_load_bitmap("assets/roadterrain.png");
 
 	carabien = al_load_bitmap("assets/carabien.png");
+	farola = al_load_bitmap("assets/farola.png");
 
 	chechu_all_sheet.reset(new Spritesheet( 6, 2, chechu_all_bitmap ));
 	humo_sheet.reset(new Spritesheet( 6, 2, humo_bitmap ));

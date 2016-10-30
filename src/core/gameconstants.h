@@ -17,4 +17,6 @@ public:
 	static constexpr float PlayerAnimScale = 0.05f;
 	static constexpr float HumoAnimScale = 8e-1f;
 
+	static constexpr float SpeedFeelingDownScaler = 5;
+
 };

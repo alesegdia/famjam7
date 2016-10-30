@@ -146,8 +146,22 @@ void GameplayScreen::render()
 	const float portion = 5;
 	const float portion_height = GameConstants::WindowHeight / portion;
 	const ALLEGRO_COLOR bands_color = al_map_rgb(0, 0, 0);
+
+	al_draw_filled_rectangle(0, 0, GameConstants::WindowWidth, portion_height * 2, al_map_rgb(95, 155, 255));
 	al_draw_filled_rectangle(0, 0, GameConstants::WindowWidth, portion_height, bands_color);
 	al_draw_filled_rectangle(0, portion_height * (portion-1), GameConstants::WindowWidth, portion_height * portion, bands_color);
+
+	const int gap = 200;
+	for( int i = 0; i < currentTrackParams().realLength / gap; i++ )
+	{
+		al_draw_bitmap( Assets::instance->notamovil, currentTrackParams().realLength - m_currentPos + 30, 42, 0);
+
+		int x = gap * i - m_currentPos / GameConstants::SpeedFeelingDownScaler;
+		if( x < 200 )
+		{
+			al_draw_bitmap( Assets::instance->farola, x, 15, 0 );
+		}
+	}
 
 	switch( m_gameState )
 	{
@@ -155,20 +169,20 @@ void GameplayScreen::render()
 		al_draw_bitmap( Assets::instance->chechu_all_sheet->getFrame(6), m_playerPos.x(), m_playerPos.y(), 0 );
 		break;
 	case GameState::Running:
-		m_playerAnimData.render(10, 30);
+		m_playerAnimData.render(10, m_playerPos.y());
 		if( m_playerSpeed > 0.5f ) {
-			m_humoAnimData.render(10, 30);
+			m_humoAnimData.render(10, m_playerPos.y());
 		}
 		break;
 	case GameState::Dashing:
-		m_playerAnimData.render(10, 30);
+		m_playerAnimData.render(10, m_playerPos.y());
 		if( m_playerSpeed > 0.2f ) {
-			m_humoAnimData.render(10, 30);
+			m_humoAnimData.render(10, m_playerPos.y());
 		}
 		break;
 	case GameState::Crushed:
 	case GameState::Success:
-		al_draw_bitmap(Assets::instance->chechu_all_sheet->getFrame(0), 10, 30, 0);
+		al_draw_bitmap(Assets::instance->chechu_all_sheet->getFrame(0), 10, m_playerPos.y(), 0);
 		al_draw_text(m_game->m_font, al_map_rgb(255,255,255), 26, 16, ALLEGRO_ALIGN_CENTRE, "menu");
 		al_draw_text(m_game->m_font, al_map_rgb(255,255,255), 70, 16, ALLEGRO_ALIGN_CENTRE, "retry");
 		if( m_selectedEnd == 0 )
@@ -181,8 +195,6 @@ void GameplayScreen::render()
 		}
 		break;
 	}
-
-	al_draw_bitmap( Assets::instance->notamovil, currentTrackParams().realLength - m_currentPos + 30, 31, 0);
 
 	if( m_gameState == GameState::Crushed )
 	{

@@ -67,6 +67,7 @@ public:
 	ALLEGRO_BITMAP* roadterrain;
 	ALLEGRO_BITMAP* notamovil;
 	ALLEGRO_BITMAP* carabien;
+	ALLEGRO_BITMAP* farola;
 
 	ALLEGRO_COLOR m_currentBikeColor;
 	void set_bike_color(int bike_type );

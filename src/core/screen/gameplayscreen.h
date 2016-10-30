@@ -72,7 +72,7 @@ private:
 	ChechuGame* m_game;
 	Camera m_cam;
 
-	Vec2i m_playerPos = Vec2i( 10, 30 );
+	Vec2i m_playerPos = Vec2i( 10, 41 );
 	double m_playerSpeed;
 	AnimationData m_playerAnimData;
 	AnimationData m_humoAnimData;
